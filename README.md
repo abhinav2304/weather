@@ -1,4 +1,4 @@
-# Raspberry Pi DHT Sensor and Weather Display
+# Raspberry Pi Weather Display
 
 This project displays indoor temperature and humidity from a DHT sensor and outdoor weather data (temperature, humidity, wind speed) from the Open-Meteo API on a Raspberry Pi with a 7-inch HDMI LCD (H) display. It features a graphical user interface using Pygame, including gauges, a clock, and a calendar.
 
