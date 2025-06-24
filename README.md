@@ -1,13 +1,18 @@
 # Raspberry Pi Weather Display
 
-This project displays indoor temperature and humidity from a DHT sensor and outdoor weather data (temperature, humidity, wind speed) from the Open-Meteo API on a Raspberry Pi with a 7-inch HDMI LCD (H) display. It features a graphical user interface using Pygame, including gauges, a clock, and a calendar.
+This project displays indoor temperature and humidity from a DHT sensor and outdoor weather data (temperature, humidity, wind speed, and more) from the Open-Meteo API on a Raspberry Pi with a 7-inch HDMI LCD (H) display. It features a modern graphical user interface using Pygame, including gauges, a clock, a calendar, and system stats.
 
 ## Features
 
 *   **Indoor Readings:** Displays real-time temperature and humidity from a DHT11/DHT22 sensor.
-*   **Outdoor Weather:** Fetches and displays current outdoor temperature, humidity, and wind speed for a specified location using the Open-Meteo API.
-*   **Graphical UI:** Pygame-based interface with gauges for indoor readings, a digital clock, and a calendar.
-*   **Full-screen Mode:** Optimized for a 7-inch display.
+*   **Outdoor Weather:** Fetches and displays current outdoor temperature, humidity, wind speed, weather description, sunlight percentage, and "Feels Like" (apparent) temperature for a specified location using the Open-Meteo API.
+*   **Daily High/Low:** Shows daily high and low outdoor temperatures in dedicated circles.
+*   **Weather Details:** Displays weather description (e.g., Clear, Rainy, Foggy) and a weather icon, as well as sunlight percentage based on cloud cover.
+*   **Wind Speed:** Shows current wind speed in km/h.
+*   **System Stats:** Displays Raspberry Pi CPU temperature, memory usage, and storage usage in circular gauges.
+*   **Graphical UI:** Pygame-based interface with large, clear gauges for indoor/outdoor readings, a digital clock, and a calendar.
+*   **Dimming Overlay:** Adjustable dimming overlay for day/night or manual control, with a slider for user override.
+*   **Full-screen Mode:** Optimized for a 7-inch display, runs in fullscreen.
 
 ## Hardware Requirements
 
@@ -37,7 +42,7 @@ This project displays indoor temperature and humidity from a DHT sensor and outd
     Install the required Python libraries.
 
     ```bash
-    pip install adafruit-blinka adafruit-circuitpython-dht pygame requests
+    pip install adafruit-blinka adafruit-circuitpython-dht pygame requests psutil
     ```
 
 5.  **DHT Sensor Wiring:**
@@ -83,9 +88,20 @@ This project displays indoor temperature and humidity from a DHT sensor and outd
 
 ## Customization
 
-*   **DHT Sensor Pin:** Modify the `DHT_PIN` variable in `dhtui.py` to match your sensor's data pin.
-*   **Weather Location:** Change `WEATHER_API_LAT` and `WEATHER_API_LON` in `dhtui.py` to your desired location's latitude and longitude.
+*   **DHT Sensor Pin:** Modify the DHT pin in `dhtui.py` to match your sensor's data pin.
+*   **Weather Location:** Change `WOLFSBURG_LAT` and `WOLFSBURG_LON` in `dhtui.py` to your desired location's latitude and longitude.
 *   **UI Adjustments:** Modify Pygame rendering parameters (font sizes, positions, colors) in `dhtui.py` to customize the display.
+*   **API Fields:** You can expand or change the weather data shown by editing the `get_outside_weather()` function and the API parameters in `dhtui.py`.
+*   **Dimming Behavior:** Adjust day/night dimming levels or disable auto-dimming in the code.
+
+## Weather Data Used
+
+The application uses the following fields from the Open-Meteo API:
+- **Current:** temperature, humidity, wind speed, weather code/description, apparent temperature (feels like), is_day, cloud cover (for sunlight %)
+- **Daily:** high/low temperature
+- **Other:** wind speed, weather icon, and more
+
+You can easily add more fields (precipitation, UV index, sunrise/sunset, etc.) by updating the API call and UI.
 
 ## Brightness Control Note
 
